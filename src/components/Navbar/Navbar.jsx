@@ -18,11 +18,7 @@ const Navbar = () => {
         {/* Logo */}
         <a href="#" className="navbar__logo" id="logo">
           <div className="navbar__logo-icon">
-            <img src="/logo-star.png" alt="SSV Logo" style={{ height: '36px', objectFit: 'contain' }} />
-          </div>
-          <div className="navbar__logo-text">
-            <span className="navbar__logo-name">SSV</span>
-            <span className="navbar__logo-tagline">PHARMACEUTICALS</span>
+            <img src={`${import.meta.env.BASE_URL}logo-star.png`} alt="SSV Logo" style={{ height: '140px', objectFit: 'contain' }} />
           </div>
         </a>
 
@@ -74,7 +70,7 @@ const Navbar = () => {
         <div className="navbar__actions">
           <a href="#contact" className="btn navbar__cta" id="contact-btn">Contact Us</a>
           <div className="navbar__badge" title="SSV Pharmaceuticals Quality Seal">
-            <img src="/logo-pentagon.png" alt="SSV Quality Seal" style={{ width: '40px', height: '40px', objectFit: 'contain' }} />
+            <img src={`${import.meta.env.BASE_URL}logo-pentagon.png`} alt="SSV Quality Seal" style={{ width: '140px', height: '140px', objectFit: 'contain' }} />
           </div>
         </div>
 

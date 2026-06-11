@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import './About.css'
-import aboutImg from '../../assets/images/about-us.png'
 
 const About = () => {
   const [visible, setVisible] = useState(false)
@@ -35,17 +34,11 @@ const About = () => {
             controls, and patient-centric approach has earned us the trust of
             healthcare professionals and patients across 12+ countries.
           </p>
-          <a href="#milestones" className="btn btn-dark" id="about-cta">
-            Our Journey
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </a>
         </div>
 
         <div className="about__image">
           <div className="about__image-wrapper">
-            <img src={aboutImg} alt="SSV Pharmaceuticals team" />
+            <img src="https://images.unsplash.com/photo-1504813184591-01572f98c85f?w=800&h=600&fit=crop&auto=format" alt="SSV Pharmaceuticals team" />
             <div className="about__badge">
               <span className="about__badge-number">38+</span>
               <span className="about__badge-label">Years of<br/>Excellence</span>
