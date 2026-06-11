@@ -9,7 +9,7 @@
 
 .footer__inner {
   display: grid;
-  grid-template-columns: 1.4fr 0.8fr 0.8fr 1fr;
+  grid-template-columns: 1.2fr 1fr 0.8fr 1.2fr 0.8fr;
   gap: 60px;
 }
 
@@ -173,9 +173,23 @@
     gap: 40px;
   }
 
+  .footer__col--seal {
+    align-items: flex-start;
+  }
+
   .footer__bottom-inner {
     flex-direction: column;
     gap: 12px;
     text-align: center;
   }
+}
+
+.footer__col--seal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer__seal {
+  margin-top: 10px;
 }

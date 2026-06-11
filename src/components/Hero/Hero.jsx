@@ -4,8 +4,8 @@ import heroBg from '../../assets/images/hero-bg.png'
 
 const stats = [
   { number: '38+', label: 'Years of Excellence' },
-  { number: '200+', label: 'Quality Products' },
-  { number: '12', label: 'Countries Served' },
+  { number: '200+', label: 'Product Portfolio' },
+  { number: '12', label: 'Export Countries' },
   { number: '500+', label: 'Professionals' },
 ]
 
@@ -26,22 +26,20 @@ const Hero = () => {
 
       <div className="hero__content container">
         <div className={`hero__text ${visible ? 'hero__text--visible' : ''}`}>
-          <span className="hero__eyebrow">ADVANCING GLOBAL HEALTHCARE</span>
+          <span className="hero__eyebrow">ADVANCING HEALTHCARE SINCE 1985</span>
           <h1 className="hero__title">
             Committed to Health,<br />
             Driven by Science.
           </h1>
           <p className="hero__description">
-            SSV Pharmaceuticals is dedicated to delivering high-quality
-            medicines across therapeutic categories — improving lives
-            worldwide through innovation and trust.
+            SSV Pharmaceuticals delivers trusted, high-quality medicines across therapeutic categories — improving lives across India and beyond.
           </p>
           <div className="hero__buttons">
-            <a href="#products" className="btn btn-primary" id="hero-cta-explore">
-              Explore Products
+            <a href="#about" className="btn btn-primary" id="hero-cta-story">
+              Discover Our Story
             </a>
-            <a href="#about" className="btn btn-outline" id="hero-cta-learn">
-              Learn More
+            <a href="#contact" className="btn btn-outline" id="hero-cta-touch">
+              Get in Touch
             </a>
           </div>
         </div>

@@ -19,9 +19,9 @@ const About = () => {
     <section className="about" id="about" ref={ref}>
       <div className={`about__inner container ${visible ? 'about--visible' : ''}`}>
         <div className="about__content">
-          <span className="section-label">About Us</span>
+          <span className="section-label">WHO WE ARE</span>
           <h2 className="section-title">
-            A Legacy of Trust in <span>Healthcare</span>
+            About <span>Us</span>
           </h2>
           <p className="about__text">
             Founded with a vision to make quality healthcare accessible to all,

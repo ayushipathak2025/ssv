@@ -1,6 +1,6 @@
 .vision {
   padding: var(--section-padding);
-  background: var(--color-section-bg);
+  background: var(--muted);
 }
 
 .vision__inner {

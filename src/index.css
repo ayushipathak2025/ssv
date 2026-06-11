@@ -3,33 +3,44 @@
    ============================================ */
 
 :root {
-  /* Colors */
-  --color-navy: #0a1628;
-  --color-navy-light: #132040;
-  --color-primary: #1a3a5c;
-  --color-primary-light: #2c5f8a;
-  --color-accent: #3b82f6;
-  --color-accent-light: #60a5fa;
-  --color-white: #ffffff;
-  --color-off-white: #f8f9fc;
-  --color-gray-50: #f1f5f9;
-  --color-gray-100: #e2e8f0;
-  --color-gray-200: #cbd5e1;
-  --color-gray-300: #94a3b8;
-  --color-gray-400: #64748b;
-  --color-gray-500: #475569;
-  --color-gray-600: #334155;
-  --color-gray-700: #1e293b;
-  --color-text-dark: #0f172a;
-  --color-text-body: #334155;
-  --color-text-muted: #64748b;
+  /* Figma Design Spec Colors */
+  --background: #ffffff;
+  --foreground: #1a2332;
+  --primary: #1b4f72;
+  --accent: #2e86ab;
+  --secondary: #ebf4f8;
+  --muted: #f5f7fa;
+  --muted-foreground: #5a6a7a;
+  --border: #1b4f721f;
+  --destructive: #d4183d;
+
+  /* Legacy Colors mapped for backward compatibility */
+  --color-navy: var(--foreground);
+  --color-navy-light: #223047;
+  --color-primary: var(--primary);
+  --color-primary-light: var(--accent);
+  --color-accent: var(--accent);
+  --color-accent-light: #4aa7d0;
+  --color-white: var(--background);
+  --color-off-white: var(--muted);
+  --color-gray-50: var(--muted);
+  --color-gray-100: var(--secondary);
+  --color-gray-200: #d0dae5;
+  --color-gray-300: var(--muted-foreground);
+  --color-gray-400: #7b8e9f;
+  --color-gray-500: var(--muted-foreground);
+  --color-gray-600: #293b4e;
+  --color-gray-700: var(--foreground);
+  --color-text-dark: var(--foreground);
+  --color-text-body: var(--muted-foreground);
+  --color-text-muted: var(--muted-foreground);
   --color-gold: #d4a853;
   --color-green: #22c55e;
-  --color-section-bg: #f0f4f8;
+  --color-section-bg: var(--secondary);
 
   /* Typography */
   --font-heading: 'Playfair Display', Georgia, serif;
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 
   /* Spacing */
   --section-padding: 100px 0;

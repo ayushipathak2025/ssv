@@ -1,6 +1,6 @@
 .quality {
   padding: var(--section-padding);
-  background: var(--color-section-bg);
+  background: var(--color-white);
 }
 
 .quality__inner {
@@ -52,7 +52,7 @@
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(26, 58, 92, 0.1));
+  background: linear-gradient(135deg, rgba(27, 79, 114, 0.1), rgba(46, 134, 171, 0.1));
   color: var(--color-accent);
   display: flex;
   align-items: center;

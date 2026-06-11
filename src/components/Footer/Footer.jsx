@@ -9,10 +9,7 @@ const Footer = () => {
           <div className="footer__brand">
             <a href="#" className="footer__logo">
               <div className="footer__logo-icon">
-                <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-                  <circle cx="18" cy="18" r="16" stroke="currentColor" strokeWidth="2"/>
-                  <path d="M12 10h3l3 8 3-8h3v16h-3V16l-3 8-3-8v10h-3V10z" fill="currentColor"/>
-                </svg>
+                <img src="/logo-pentagon.png" alt="SSV Logo" style={{ width: '40px', height: '40px', objectFit: 'contain' }} />
               </div>
               <div className="footer__logo-text">
                 <span className="footer__logo-name">SSV</span>
@@ -20,8 +17,7 @@ const Footer = () => {
               </div>
             </a>
             <p className="footer__brand-desc">
-              Committed to delivering high-quality pharmaceutical products
-              and improving global healthcare through science-driven innovation.
+              Committed to delivering high-quality pharmaceutical formulations and healthcare solutions globally.
             </p>
             <div className="footer__socials">
               <a href="#" aria-label="LinkedIn" className="footer__social">
@@ -42,31 +38,27 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* About Column */}
+          {/* Mission Column */}
           <div className="footer__col">
-            <h4 className="footer__col-title">About</h4>
-            <ul className="footer__links">
-              <li><a href="#about">Our Story</a></li>
-              <li><a href="#vision">Vision & Values</a></li>
-              <li><a href="#milestones">Milestones</a></li>
-              <li><a href="#quality">Quality</a></li>
-              <li><a href="#">Careers</a></li>
-            </ul>
+            <h4 className="footer__col-title">Our Mission</h4>
+            <p className="footer__text" style={{ fontSize: '0.85rem', color: 'var(--color-gray-300)', lineHeight: '1.6' }}>
+              To deliver safe, effective, and affordable pharmaceutical solutions through continuous research, ethical practices, and unwavering commitment to quality.
+            </p>
           </div>
 
-          {/* Quick Links */}
+          {/* Quick Links Column */}
           <div className="footer__col">
             <h4 className="footer__col-title">Quick Links</h4>
             <ul className="footer__links">
-              <li><a href="#">Tablets & Capsules</a></li>
-              <li><a href="#">Injectables</a></li>
-              <li><a href="#">Syrups & Suspensions</a></li>
-              <li><a href="#">Ointments & Creams</a></li>
-              <li><a href="#">Nutraceuticals</a></li>
+              <li><a href="#hero">Home</a></li>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#products">Products</a></li>
+              <li><a href="#careers">Careers</a></li>
+              <li><a href="#contact">Contact Us</a></li>
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Contact Column */}
           <div className="footer__col">
             <h4 className="footer__col-title">Contact Us</h4>
             <div className="footer__contact-list">
@@ -75,13 +67,13 @@ const Footer = () => {
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
                   <circle cx="12" cy="10" r="3"/>
                 </svg>
-                <span>Industrial Area, Phase-II<br/>Panchkula, Haryana, India</span>
+                <span>123 Pharma Avenue, Andheri East,<br/>Mumbai 400069, Maharashtra, India</span>
               </div>
               <div className="footer__contact-item">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
                 </svg>
-                <span>+91 172 256 7890</span>
+                <span>+91 22 1234 5678</span>
               </div>
               <div className="footer__contact-item">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -92,12 +84,20 @@ const Footer = () => {
               </div>
             </div>
           </div>
+
+          {/* Quality Seal Column */}
+          <div className="footer__col footer__col--seal">
+            <h4 className="footer__col-title">Quality Seal</h4>
+            <div className="footer__seal" style={{ opacity: '0.85' }}>
+              <img src="/logo-star.png" alt="SSV Quality Seal" style={{ height: '54px', objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
+            </div>
+          </div>
         </div>
       </div>
 
       <div className="footer__bottom">
         <div className="footer__bottom-inner container">
-          <p>&copy; {new Date().getFullYear()} SSV Pharmaceuticals. All rights reserved.</p>
+          <p>&copy; 2024 SSV Pharmaceuticals. All rights reserved. Committed to Health. Driven by Science.</p>
           <div className="footer__bottom-links">
             <a href="#">Privacy Policy</a>
             <a href="#">Terms of Service</a>
