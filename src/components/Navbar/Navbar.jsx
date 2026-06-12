@@ -104,7 +104,7 @@ const Navbar = () => {
         {/* Logo */}
         <a href="#" className="navbar__logo" id="logo">
           <div className="navbar__logo-icon">
-            <img src={`${import.meta.env.BASE_URL}logo-star.png`} alt="SSV Logo" style={{ width: '150px', height: '68px', objectFit: 'contain' }} />
+            <img src={`${import.meta.env.BASE_URL}logo-star.png`} alt="SSV Logo" style={{ width: '180px', height: '80px', objectFit: 'contain' }} />
           </div>
         </a>
 
@@ -215,7 +215,7 @@ const Navbar = () => {
 
           <a href="#contact" className="btn navbar__cta" id="contact-btn">Contact Us</a>
           <div className="navbar__badge" title="SSV Pharmaceuticals Quality Seal">
-            <img src={`${import.meta.env.BASE_URL}logo-pentagon.png`} alt="SSV Quality Seal" style={{ width: '68px', height: '68px', objectFit: 'contain' }} />
+            <img src={`${import.meta.env.BASE_URL}logo-pentagon.png`} alt="SSV Quality Seal" style={{ width: '80px', height: '80px', objectFit: 'contain' }} />
           </div>
         </div>
 
