@@ -81,6 +81,15 @@
   color: var(--color-accent);
 }
 
+/* Button-as-link reset — removes browser button appearance */
+.navbar__link--btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+
 /* Dropdown */
 .navbar__item--dropdown {
   position: relative;

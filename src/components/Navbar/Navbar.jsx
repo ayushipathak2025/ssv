@@ -100,20 +100,35 @@ const Navbar = () => {
     }
   }
 
+  // Navigate to home page section safely with HashRouter
+  const scrollToSection = (sectionId) => {
+    const isHome = window.location.hash === '#/' || window.location.hash === '' || window.location.hash === '#'
+    if (!isHome) {
+      navigate('/')
+      setTimeout(() => {
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
+      }, 300)
+    } else {
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
+    }
+    setMobileOpen(false)
+    setActiveDropdown(null)
+  }
+
   return (
     <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`} id="navbar">
       <div className="navbar__inner container">
         {/* Logo */}
-        <a href="#" className="navbar__logo" id="logo">
+        <Link to="/" className="navbar__logo" id="logo">
           <div className="navbar__logo-icon">
             <img src={`${import.meta.env.BASE_URL}logo-star.png`} alt="SSV Logo" style={{ width: '180px', height: '80px', objectFit: 'contain' }} />
           </div>
-        </a>
+        </Link>
 
         {/* Desktop Nav */}
         <ul className="navbar__menu" id="nav-menu">
           <li className="navbar__item">
-            <a href="#hero" className="navbar__link">Home</a>
+            <button className="navbar__link navbar__link--btn" onClick={() => scrollToSection('hero')}>Home</button>
           </li>
           <li className="navbar__item navbar__item--dropdown"
               onMouseEnter={() => setActiveDropdown('about')}
@@ -134,23 +149,23 @@ const Navbar = () => {
           <li className="navbar__item navbar__item--dropdown"
               onMouseEnter={() => setActiveDropdown('products')}
               onMouseLeave={() => setActiveDropdown(null)}>
-            <a href="#products" className="navbar__link">
+            <button className="navbar__link navbar__link--btn" onClick={() => scrollToSection('products')}>
               Products
               <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
-            </a>
+            </button>
             {activeDropdown === 'products' && (
               <ul className="navbar__dropdown">
-                <li><a href="#products">Cough & Anti Cold Range</a></li>
-                <li><a href="#products">Pain Management</a></li>
-                <li><a href="#products">Gynae</a></li>
-                <li><a href="#products">Gastro</a></li>
-                <li><a href="#products">General</a></li>
-                <li><a href="#products">All Products</a></li>
+                <li><button onClick={() => scrollToSection('products')}>Cough & Anti Cold Range</button></li>
+                <li><button onClick={() => scrollToSection('products')}>Pain Management</button></li>
+                <li><button onClick={() => scrollToSection('products')}>Gynae</button></li>
+                <li><button onClick={() => scrollToSection('products')}>Gastro</button></li>
+                <li><button onClick={() => scrollToSection('products')}>General</button></li>
+                <li><button onClick={() => scrollToSection('products')}>All Products</button></li>
               </ul>
             )}
           </li>
           <li className="navbar__item">
-            <a href="#careers" className="navbar__link">Careers</a>
+            <button className="navbar__link navbar__link--btn" onClick={() => scrollToSection('careers')}>Careers</button>
           </li>
         </ul>
 
@@ -215,7 +230,7 @@ const Navbar = () => {
             </div>
           </div>
 
-          <a href="#contact" className="btn navbar__cta" id="contact-btn">Contact Us</a>
+          <button className="btn navbar__cta" id="contact-btn" onClick={() => scrollToSection('contact')}>Contact Us</button>
           <div className="navbar__badge" title="SSV Pharmaceuticals Quality Seal">
             <img src={`${import.meta.env.BASE_URL}logo-pentagon.png`} alt="SSV Quality Seal" style={{ width: '80px', height: '80px', objectFit: 'contain' }} />
           </div>
@@ -237,14 +252,14 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {mobileOpen && (
         <div className="navbar__mobile" id="mobile-menu">
-          <a href="#hero" onClick={() => setMobileOpen(false)}>Home</a>
-          <a href="#about" onClick={() => setMobileOpen(false)}>About Us</a>
-          <a href="#vision" onClick={() => setMobileOpen(false)}>Vision & Values</a>
-          <a href="#milestones" onClick={() => setMobileOpen(false)}>Milestones</a>
-          <a href="#products" onClick={() => setMobileOpen(false)}>Products</a>
-          <a href="#quality" onClick={() => setMobileOpen(false)}>Quality & Certifications</a>
-          <a href="#careers" onClick={() => setMobileOpen(false)}>Careers</a>
-          <a href="#contact" className="btn btn-dark" style={{ marginTop: '10px' }} onClick={() => setMobileOpen(false)}>Contact Us</a>
+          <button onClick={() => scrollToSection('hero')}>Home</button>
+          <Link to="/about" onClick={() => setMobileOpen(false)}>About Us</Link>
+          <button onClick={() => scrollToSection('vision')}>Vision & Values</button>
+          <button onClick={() => scrollToSection('milestones')}>Milestones</button>
+          <button onClick={() => scrollToSection('products')}>Products</button>
+          <button onClick={() => scrollToSection('quality')}>Quality & Certifications</button>
+          <button onClick={() => scrollToSection('careers')}>Careers</button>
+          <button className="btn btn-dark" style={{ marginTop: '10px' }} onClick={() => scrollToSection('contact')}>Contact Us</button>
         </div>
       )}
     </nav>
