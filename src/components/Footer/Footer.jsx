@@ -9,7 +9,7 @@ const Footer = () => {
           <div className="footer__brand">
             <a href="#" className="footer__logo">
               <div className="footer__logo-icon">
-                <img src={`${import.meta.env.BASE_URL}logo-star.png`} alt="SSV Logo" style={{ height: '54px', objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
+                <img src={`${import.meta.env.BASE_URL}logo-star.png`} alt="SSV Logo" style={{ height: '100px', objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
               </div>
             </a>
             <p className="footer__brand-desc">
@@ -69,7 +69,7 @@ const Footer = () => {
           <div className="footer__col footer__col--seal">
             <h4 className="footer__col-title">Quality Seal</h4>
             <div className="footer__seal" style={{ opacity: '0.85' }}>
-              <img src={`${import.meta.env.BASE_URL}logo-pentagon.png`} alt="SSV Quality Seal" style={{ width: '80px', height: '80px', objectFit: 'contain' }} />
+              <img src={`${import.meta.env.BASE_URL}logo-pentagon.png`} alt="SSV Quality Seal" style={{ width: '140px', height: '140px', objectFit: 'contain' }} />
             </div>
           </div>
         </div>
