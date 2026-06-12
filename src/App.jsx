@@ -3,9 +3,6 @@ import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer/Footer'
 import Hero from './components/Hero/Hero'
 import About from './components/About/About'
-import Vision from './components/Vision/Vision'
-import Milestones from './components/Milestones/Milestones'
-import Quality from './components/Quality/Quality'
 import AboutPage from './pages/AboutPage'
 
 function HomePage() {
@@ -13,9 +10,6 @@ function HomePage() {
     <main>
       <Hero />
       <About />
-      <Vision />
-      <Milestones />
-      <Quality />
     </main>
   )
 }
