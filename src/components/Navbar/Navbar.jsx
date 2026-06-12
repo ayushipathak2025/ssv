@@ -127,6 +127,10 @@ const Navbar = () => {
     } else {
       navigate('/about', { state: { scrollTo: sectionId } })
     }
+  }
+
+  const handleContactClick = () => {
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
     setMobileOpen(false)
     setActiveDropdown(null)
   }
@@ -262,7 +266,7 @@ const Navbar = () => {
             </div>
           </div>
 
-          <button className="btn navbar__cta" id="contact-btn" onClick={() => scrollToSection('contact')}>Contact Us</button>
+          <button className="btn navbar__cta" id="contact-btn" onClick={handleContactClick}>Contact Us</button>
           <div className="navbar__badge" title="SSV Pharmaceuticals Quality Seal">
             <img src={`${import.meta.env.BASE_URL}logo-pentagon.png`} alt="SSV Quality Seal" style={{ width: '80px', height: '80px', objectFit: 'contain' }} />
           </div>
@@ -291,7 +295,7 @@ const Navbar = () => {
           <Link to="/" onClick={(e) => { e.preventDefault(); scrollToSection('products'); }}>Products</Link>
           <Link to="/about" onClick={(e) => { e.preventDefault(); scrollToAboutSection('about-standards'); }}>Quality & Certifications</Link>
           <Link to="/" onClick={(e) => { e.preventDefault(); scrollToSection('careers'); }}>Careers</Link>
-          <Link to="/" className="btn btn-dark" style={{ marginTop: '10px' }} onClick={(e) => { e.preventDefault(); scrollToSection('contact'); }}>Contact Us</Link>
+          <Link to="#" className="btn btn-dark" style={{ marginTop: '10px' }} onClick={(e) => { e.preventDefault(); handleContactClick(); }}>Contact Us</Link>
         </div>
       )}
     </nav>
