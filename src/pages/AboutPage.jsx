@@ -103,75 +103,35 @@ const AboutPage = () => {
           <div className="ap-section-header">
             <span className="section-label">Our Philosophy</span>
             <h2 className="section-title">Vision & Values</h2>
-            <p className="ap-section-subtitle">Driven by Innovation, Guided by Integrity.</p>
           </div>
           
           <div className="ap-philosophy__content">
-            {/* Left Column: Vision Points */}
-            <div className="ap-philosophy__vision">
-              <ul className="ap-vision__list">
-                <li className="ap-vision__item">
-                  <div className="ap-vision__marker"></div>
-                  <p>To be a globally trusted pharmaceutical company that leads through innovation.</p>
-                </li>
-                <li className="ap-vision__item">
-                  <div className="ap-vision__marker"></div>
-                  <p>To reach every patient in need and set the benchmark for quality and affordability.</p>
-                </li>
-                <li className="ap-vision__item">
-                  <div className="ap-vision__marker"></div>
-                  <p>To make life-saving medicines accessible to all, regardless of geography or circumstance.</p>
-                </li>
-                <li className="ap-vision__item">
-                  <div className="ap-vision__marker"></div>
-                  <p>To be synonymous with trust, healing, and scientific excellence worldwide.</p>
-                </li>
+            {/* Vision Card */}
+            <div className="ap-philosophy__card">
+              <div className="ap-philosophy__card-icon-container">
+                <div className="ap-philosophy__icon-shape ap-philosophy__icon-shape--circle"></div>
+              </div>
+              <h3 className="ap-philosophy__card-title">Vision</h3>
+              <ul className="ap-philosophy__card-list">
+                <li>To be a globally trusted pharmaceutical company that leads through innovation.</li>
+                <li>To reach every patient in need and set the benchmark for quality and affordability.</li>
+                <li>To make life-saving medicines accessible to all, regardless of geography or circumstance.</li>
+                <li>To be synonymous with trust, healing, and scientific excellence worldwide.</li>
               </ul>
             </div>
 
-            {/* Right Column: Values Cards Grid */}
-            <div className="ap-philosophy__values">
-              <div className="ap-value__card">
-                <div className="ap-value__icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                  </svg>
-                </div>
-                <h3 className="ap-value__title">Integrity</h3>
-                <p className="ap-value__desc">Unwavering honesty and transparency in everything we do.</p>
+            {/* Values Card */}
+            <div className="ap-philosophy__card">
+              <div className="ap-philosophy__card-icon-container">
+                <div className="ap-philosophy__icon-shape ap-philosophy__icon-shape--diamond"></div>
               </div>
-
-              <div className="ap-value__card">
-                <div className="ap-value__icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <circle cx="12" cy="12" r="10" />
-                    <line x1="2" y1="12" x2="22" y2="12" />
-                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                  </svg>
-                </div>
-                <h3 className="ap-value__title">Innovation</h3>
-                <p className="ap-value__desc">Continuously advancing science and pharmaceutical solutions.</p>
-              </div>
-
-              <div className="ap-value__card">
-                <div className="ap-value__icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                  </svg>
-                </div>
-                <h3 className="ap-value__title">Patient-First</h3>
-                <p className="ap-value__desc">Every decision begins and ends with patient wellbeing.</p>
-              </div>
-
-              <div className="ap-value__card">
-                <div className="ap-value__icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                  </svg>
-                </div>
-                <h3 className="ap-value__title">Excellence</h3>
-                <p className="ap-value__desc">Committed to the highest standards of quality and safety.</p>
-              </div>
+              <h3 className="ap-philosophy__card-title">Values</h3>
+              <ul className="ap-philosophy__card-list">
+                <li><strong>Integrity</strong> — Unwavering honesty and transparency in everything we do.</li>
+                <li><strong>Innovation</strong> — Continuously advancing science and pharmaceutical solutions.</li>
+                <li><strong>Patient-First</strong> — Every decision begins and ends with patient wellbeing.</li>
+                <li><strong>Excellence</strong> — Committed to the highest standards of quality and safety.</li>
+              </ul>
             </div>
           </div>
         </div>

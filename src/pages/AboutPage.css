@@ -226,91 +226,93 @@
 
 .ap-philosophy__content {
   display: grid;
-  grid-template-columns: 1fr 1.15fr;
-  gap: 80px;
-  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: stretch;
+  margin-top: 40px;
 }
 
-.ap-philosophy__vision {
-  display: flex;
-  flex-direction: column;
-}
-
-.ap-vision__list {
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-}
-
-.ap-vision__item {
-  display: flex;
-  gap: 20px;
-  align-items: flex-start;
-}
-
-.ap-vision__marker {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: var(--accent);
-  margin-top: 8px;
-  flex-shrink: 0;
-  box-shadow: 0 0 0 4px rgba(46, 134, 171, 0.2);
-}
-
-.ap-vision__item p {
-  font-size: 1.05rem;
-  line-height: 1.6;
-  color: var(--foreground);
-  font-weight: 500;
-}
-
-/* Values Grid */
-.ap-philosophy__values {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-}
-
-.ap-value__card {
+.ap-philosophy__card {
   background: #ffffff;
   border-radius: var(--radius-lg);
-  padding: 36px 28px;
+  padding: 48px;
   box-shadow: var(--shadow-sm);
-  border: 1px solid rgba(27, 79, 114, 0.05);
+  border: 1px solid rgba(27, 79, 114, 0.04);
   transition: var(--transition-medium);
+  display: flex;
+  flex-direction: column;
 }
 
-.ap-value__card:hover {
+.ap-philosophy__card:hover {
   transform: translateY(-6px);
   box-shadow: var(--shadow-lg);
-  border-color: rgba(46, 134, 171, 0.2);
+  border-color: rgba(46, 134, 171, 0.15);
 }
 
-.ap-value__icon {
-  width: 48px;
-  height: 48px;
+.ap-philosophy__card-icon-container {
+  width: 56px;
+  height: 56px;
   border-radius: var(--radius-md);
-  background-color: rgba(46, 134, 171, 0.1);
-  color: var(--accent);
+  background-color: rgba(27, 79, 114, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
-.ap-value__title {
+.ap-philosophy__icon-shape {
+  background-color: var(--primary, #1b4f72);
+}
+
+.ap-philosophy__icon-shape--circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.ap-philosophy__icon-shape--diamond {
+  width: 18px;
+  height: 18px;
+  transform: rotate(45deg);
+}
+
+.ap-philosophy__card-title {
   font-family: var(--font-heading);
-  font-size: 1.25rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: var(--foreground);
-  margin-bottom: 10px;
+  margin-bottom: 24px;
 }
 
-.ap-value__desc {
-  font-size: 0.92rem;
+.ap-philosophy__card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0;
+  list-style: none;
+}
+
+.ap-philosophy__card-list li {
+  position: relative;
+  padding-left: 20px;
+  font-size: 0.95rem;
   line-height: 1.6;
   color: var(--muted-foreground);
+}
+
+.ap-philosophy__card-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent, #2e86ab);
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.ap-philosophy__card-list li strong {
+  color: var(--foreground);
+  font-weight: 700;
 }
 
 /* ── Our Journey / Timeline ── */
