@@ -20,7 +20,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 64px;
+  height: 72px;
 }
 
 /* Logo */
@@ -377,12 +377,22 @@
 
 /* Responsive */
 @media (max-width: 968px) {
-  .navbar__menu,
+  .navbar__menu {
+    display: none;
+  }
+
+  /* Keep search + CTA hidden on very small screens, but show on mid-size */
   .navbar__actions {
     display: none;
   }
 
   .navbar__hamburger {
+    display: flex;
+  }
+}
+
+@media (min-width: 969px) {
+  .navbar__actions {
     display: flex;
   }
 }
