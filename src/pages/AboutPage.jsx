@@ -20,6 +20,11 @@ const AboutPage = () => {
     }
   }, [location])
 
+  const handleScrollToContact = (e) => {
+    e.preventDefault()
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+  }
+
   return (
     <div className="about-page">
       {/* ── Hero Banner ── */}
@@ -302,9 +307,9 @@ const AboutPage = () => {
         <div className="container ap-cta__inner">
           <h2>Ready to Partner with Us?</h2>
           <p>Get in touch with our team to explore opportunities in pharmaceutical manufacturing and distribution.</p>
-          <Link to="/" className="btn ap-cta__btn">
+          <a href="#contact" onClick={handleScrollToContact} className="btn ap-cta__btn">
             Contact Us
-          </Link>
+          </a>
         </div>
       </section>
     </div>
