@@ -186,7 +186,24 @@ const AboutPage = () => {
           </div>
 
           <div className="ap-journey__inner">
-            {/* Left Column: Timeline List */}
+            {/* Left Column: Lab Image & Badge */}
+            <div className="ap-journey__image">
+              <div className="ap-journey__image-container">
+                <img 
+                  src="https://images.unsplash.com/photo-1581093577421-f561a654a353?w=800&h=600&fit=crop&auto=format" 
+                  alt="Laboratory work" 
+                  className="ap-journey__img"
+                />
+                <div className="ap-journey__badge">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="ap-badge-icon">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                  </svg>
+                  <span>25+ Industry Awards</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Timeline List */}
             <div className="ap-journey__timeline">
               <div className="ap-timeline-track"></div>
               
@@ -227,23 +244,6 @@ const AboutPage = () => {
                 <div className="ap-timeline-content">
                   <h4 className="ap-timeline-title">Expansion & Beyond</h4>
                   <p>Crossed 200-product portfolio with entry into biosimilars.</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Column: Lab Image & Badge */}
-            <div className="ap-journey__image">
-              <div className="ap-journey__image-container">
-                <img 
-                  src="https://images.unsplash.com/photo-1581093577421-f561a654a353?w=800&h=600&fit=crop&auto=format" 
-                  alt="Laboratory work" 
-                  className="ap-journey__img"
-                />
-                <div className="ap-journey__badge">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="ap-badge-icon">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                  </svg>
-                  <span>25+ Industry Awards</span>
                 </div>
               </div>
             </div>
