@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import './Navbar.css'
 
 // All searchable content across the site
@@ -23,6 +24,7 @@ const SEARCH_INDEX = [
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const navigate = useNavigate()
   const [activeDropdown, setActiveDropdown] = useState(null)
 
   // Search state
@@ -116,16 +118,16 @@ const Navbar = () => {
           <li className="navbar__item navbar__item--dropdown"
               onMouseEnter={() => setActiveDropdown('about')}
               onMouseLeave={() => setActiveDropdown(null)}>
-            <a href="#about" className="navbar__link">
+            <Link to="/about" className="navbar__link">
               About Us
               <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
-            </a>
+            </Link>
             {activeDropdown === 'about' && (
               <ul className="navbar__dropdown">
-                <li><a href="#about">Who We Are</a></li>
-                <li><a href="#vision">Vision & Values</a></li>
-                <li><a href="#milestones">Milestones</a></li>
-                <li><a href="#quality">Quality</a></li>
+                <li><Link to="/about" onClick={() => setActiveDropdown(null)}>Who We Are</Link></li>
+                <li><Link to="/about" onClick={() => setActiveDropdown(null)}>Vision & Values</Link></li>
+                <li><Link to="/about" onClick={() => setActiveDropdown(null)}>Milestones</Link></li>
+                <li><Link to="/about" onClick={() => setActiveDropdown(null)}>Quality</Link></li>
               </ul>
             )}
           </li>
