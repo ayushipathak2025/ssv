@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { useLocation, Link } from 'react-router-dom'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import './ProductsPage.css'
 
@@ -77,20 +77,16 @@ const categoriesData = [
 ]
 
 const ProductsPage = () => {
-  const location = useLocation()
-  const [activeCategory, setActiveCategory] = useState(categoriesData[0].id)
+  const [expandedCategories, setExpandedCategories] = useState({
+    [categoriesData[0].id]: true // First category open by default
+  })
 
-  useEffect(() => {
-    if (location.state?.category) {
-      const selected = categoriesData.find((category) => category.id === location.state.category)
-      if (selected) {
-        setActiveCategory(selected.id)
-      }
-      window.history.replaceState({}, document.title)
-    }
-  }, [location.state])
-
-  const currentCategory = categoriesData.find((category) => category.id === activeCategory) || categoriesData[0]
+  const toggleCategory = (categoryId) => {
+    setExpandedCategories((prev) => ({
+      ...prev,
+      [categoryId]: !prev[categoryId]
+    }))
+  }
 
   return (
     <div className="products-page">
@@ -116,96 +112,86 @@ const ProductsPage = () => {
       </section>
 
       <section className="pp-selection container">
-        <div className="pp-selection__top">
-          <div className="pp-categories__intro">
-            <span className="section-label">Category selector</span>
-            <h2 className="section-title">Select the range you want to explore</h2>
-            <p className="section-copy">
-              The dropdown lets you switch between therapeutic categories and reveals the matching products below.
-            </p>
-          </div>
+        <div className="pp-explore-header">
+          <span className="section-label">Explore</span>
+          <h2 className="section-title">Browse Products by Category</h2>
+        </div>
 
-          <div className="pp-category-select">
-            <label htmlFor="categorySelect">Choose a category</label>
-            <div className="pp-category-select__field">
-              <select
-                id="categorySelect"
-                value={activeCategory}
-                onChange={(event) => setActiveCategory(event.target.value)}
+        <div className="pp-categories-accordion">
+          {categoriesData.map((category) => (
+            <div key={category.id} className="pp-category-item">
+              <button
+                className="pp-category-button"
+                style={{ '--accent-color': category.themeColor }}
+                onClick={() => toggleCategory(category.id)}
               >
-                {categoriesData.map((category) => (
-                  <option key={category.id} value={category.id}>
-                    {category.name}
-                  </option>
-                ))}
-              </select>
+                <div className="pp-category-button__content">
+                  <h3 className="pp-category-button__name">{category.name}</h3>
+                  <p className="pp-category-button__tagline">{category.tagline}</p>
+                </div>
+                <div className="pp-category-button__action">
+                  <span>View Products</span>
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    className={`pp-category-chevron ${expandedCategories[category.id] ? 'open' : ''}`}
+                  >
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </div>
+              </button>
+
+              <AnimatePresence>
+                {expandedCategories[category.id] && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="pp-products-dropdown"
+                    style={{ '--accent-color': category.themeColor }}
+                  >
+                    <div className="pp-product-grid">
+                      {category.products.map((product, idx) => (
+                        <motion.article
+                          key={product.id}
+                          className="pp-product-card"
+                          initial={{ opacity: 0, y: 12 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.25, delay: idx * 0.05 }}
+                        >
+                          <div className="pp-product-card__media">
+                            <img src={product.img} alt={product.name} />
+                          </div>
+                          <div className="pp-product-card__content">
+                            <span className="pp-product-card__form">{product.formSize}</span>
+                            <h4>{product.name}</h4>
+                            <p>{product.desc}</p>
+                          </div>
+                        </motion.article>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
-          </div>
+          ))}
         </div>
 
-        <div className="pp-category-preview" style={{ '--accent-color': currentCategory.themeColor }}>
-          <div className="pp-category-preview__content">
-            <span className="pp-category-preview__eyebrow">Category overview</span>
-            <h2>{currentCategory.name}</h2>
-            <p>{currentCategory.tagline}</p>
-          </div>
-          <div className="pp-category-preview__media">
-            <img src={currentCategory.image} alt={currentCategory.name} />
-          </div>
-        </div>
-
-        <main className="pp-products-panel">
-          <div className="pp-products-panel__header" style={{ '--accent-color': currentCategory.themeColor }}>
-            <span className="pp-products-panel__eyebrow">Product range</span>
-            <h2 className="pp-products-panel__headline">{currentCategory.name} products</h2>
-            <p className="pp-products-panel__description">{currentCategory.tagline}</p>
-            <div className="pp-products-panel__status">
-              <span>{currentCategory.products.length} products</span>
-              <span className="pp-products-panel__divider" />
-              <span>Square product cards with image, name and form</span>
+        <section className="pp-cta-strip">
+          <div className="pp-cta-strip__inner">
+            <div>
+              <p className="pp-cta-strip__label">Custom orders welcome</p>
+              <h3>Speak with our team for bulk supply and branded formulations.</h3>
             </div>
+            <Link to="/about" className="btn btn-primary">Contact Us</Link>
           </div>
-
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentCategory.id}
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -18 }}
-              transition={{ duration: 0.35 }}
-              className="pp-product-grid"
-            >
-              {currentCategory.products.map((product) => (
-                <motion.article
-                  key={product.id}
-                  className="pp-product-card"
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="pp-product-card__media">
-                    <img src={product.img} alt={product.name} />
-                  </div>
-                  <div className="pp-product-card__content">
-                    <span className="pp-product-card__form">{product.formSize}</span>
-                    <h3>{product.name}</h3>
-                    <p>{product.desc}</p>
-                  </div>
-                </motion.article>
-              ))}
-            </motion.div>
-          </AnimatePresence>
-
-          <section className="pp-cta-strip">
-            <div className="pp-cta-strip__inner">
-              <div>
-                <p className="pp-cta-strip__label">Custom orders welcome</p>
-                <h3>Speak with our team for bulk supply and branded formulations.</h3>
-              </div>
-              <Link to="/about" className="btn btn-primary">Contact Us</Link>
-            </div>
-          </section>
-        </main>
+        </section>
       </section>
     </div>
   )
