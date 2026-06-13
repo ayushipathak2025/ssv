@@ -115,10 +115,13 @@ const ProductsPage = () => {
   useEffect(() => {
     if (location.state?.category) {
       const categoryId = location.state.category
-      setExpandedCategory(categoryId)
+      // Defer setState to avoid calling it synchronously inside an effect
+      const expandTimer = setTimeout(() => {
+        setExpandedCategory(categoryId)
+      }, 0)
       
-      // Delay slightly for render cycles
-      setTimeout(() => {
+      // Delay slightly for render cycles then scroll
+      const scrollTimer = setTimeout(() => {
         const element = categoryRefs.current[categoryId]
         if (element) {
           element.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -127,6 +130,10 @@ const ProductsPage = () => {
       
       // Clear navigation state
       window.history.replaceState({}, document.title)
+      return () => {
+        clearTimeout(expandTimer)
+        clearTimeout(scrollTimer)
+      }
     } else {
       window.scrollTo(0, 0)
     }
@@ -168,12 +175,15 @@ const ProductsPage = () => {
 
   // Auto-expand accordions that have matches when searching
   useEffect(() => {
-    if (searchQuery.trim() && filteredCategories.length > 0) {
+    if (!searchQuery.trim()) return
+    const timer = setTimeout(() => {
       if (filteredCategories.length === 1) {
         setExpandedCategory(filteredCategories[0].id)
       }
-    }
-  }, [searchQuery])
+    }, 0)
+    return () => clearTimeout(timer)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchQuery, filteredCategories.length])
 
   return (
     <div className="products-page">
