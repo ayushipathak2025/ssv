@@ -1,9 +1,21 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
 import './AboutPage.css'
 
 const AboutPage = () => {
   const location = useLocation()
+  const [heroVisible, setHeroVisible] = useState(false)
+
+  const [storyRef, storyVisible] = useIntersectionObserver()
+  const [philosophyRef, philosophyVisible] = useIntersectionObserver()
+  const [journeyRef, journeyVisible] = useIntersectionObserver()
+  const [standardsRef, standardsVisible] = useIntersectionObserver()
+
+  useEffect(() => {
+    const timer = setTimeout(() => setHeroVisible(true), 200)
+    return () => clearTimeout(timer)
+  }, [])
 
   useEffect(() => {
     if (location.state?.scrollTo) {
@@ -28,7 +40,7 @@ const AboutPage = () => {
           <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?w=1600&auto=format&fit=crop&q=80" alt="SSV laboratory" />
           <div className="ap-hero__overlay" />
         </div>
-        <div className="ap-hero__content container">
+        <div className={`ap-hero__content container scroll-reveal ${heroVisible ? 'scroll-reveal--visible' : ''}`}>
           <Link to="/" className="ap-back-btn">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
               <polyline points="15 18 9 12 15 6" />
@@ -50,7 +62,7 @@ const AboutPage = () => {
       </section>
 
       {/* ── Our Story / About Us Section ── */}
-      <section className="ap-section ap-who" id="about-story">
+      <section className={`ap-section ap-who scroll-reveal ${storyVisible ? 'scroll-reveal--visible' : ''}`} id="about-story" ref={storyRef}>
         <div className="container ap-who__inner">
           <div className="ap-who__content">
             <span className="section-label">Our Story</span>
@@ -98,7 +110,7 @@ const AboutPage = () => {
       </section>
 
       {/* ── Our Philosophy / Vision & Values Section ── */}
-      <section className="ap-section ap-philosophy" id="about-philosophy">
+      <section className={`ap-section ap-philosophy scroll-reveal ${philosophyVisible ? 'scroll-reveal--visible' : ''}`} id="about-philosophy" ref={philosophyRef}>
         <div className="container">
           <div className="ap-section-header">
             <span className="section-label">Our Philosophy</span>
@@ -138,7 +150,7 @@ const AboutPage = () => {
       </section>
 
       {/* ── Our Journey / Milestones & Recognition Section ── */}
-      <section className="ap-section ap-journey" id="about-journey">
+      <section className={`ap-section ap-journey scroll-reveal ${journeyVisible ? 'scroll-reveal--visible' : ''}`} id="about-journey" ref={journeyRef}>
         <div className="container">
           <div className="ap-section-header">
             <span className="section-label">Our Journey</span>
@@ -212,7 +224,7 @@ const AboutPage = () => {
       </section>
 
       {/* ── Our Standards / Quality Section ── */}
-      <section className="ap-section ap-standards" id="about-standards">
+      <section className={`ap-section ap-standards scroll-reveal ${standardsVisible ? 'scroll-reveal--visible' : ''}`} id="about-standards" ref={standardsRef}>
         <div className="container ap-standards__inner">
           {/* Left Column: Copy & Certifications */}
           <div className="ap-standards__content">
@@ -246,7 +258,7 @@ const AboutPage = () => {
                 className="ap-standards__img"
               />
               <div className="ap-standards__badge">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="ap-badge-icon">
                   <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
                   <polyline points="22 4 12 14.01 9 11.01" />
                 </svg>

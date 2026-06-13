@@ -1,6 +1,7 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
 import './ProductsPage.css'
 
 const categoriesData = [
@@ -77,15 +78,42 @@ const categoriesData = [
 ]
 
 const ProductsPage = () => {
-  const [expandedCategories, setExpandedCategories] = useState({
-    [categoriesData[0].id]: true // First category open by default
-  })
+  const location = useLocation()
+  const [expandedCategory, setExpandedCategory] = useState(null)
+  const [heroVisible, setHeroVisible] = useState(false)
+  const [selectionRef, selectionVisible] = useIntersectionObserver()
+
+  useEffect(() => {
+    const timer = setTimeout(() => setHeroVisible(true), 200)
+    return () => clearTimeout(timer)
+  }, [])
+
+  useEffect(() => {
+    if (location.state?.category) {
+      const categoryId = location.state.category
+      setExpandedCategory(categoryId)
+      
+      // Clear location state to prevent running again on page reloads/interactions
+      window.history.replaceState({}, document.title)
+
+      // Scroll to that category item card
+      setTimeout(() => {
+        const el = document.getElementById(categoryId)
+        if (el) {
+          const rect = el.getBoundingClientRect()
+          const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+          const targetY = rect.top + scrollTop - 120 // Offset to keep banner below fixed navbar
+          window.scrollTo({ top: targetY, behavior: 'smooth' })
+        }
+      }, 400)
+    } else {
+      setExpandedCategory(null)
+      window.scrollTo(0, 0)
+    }
+  }, [location])
 
   const toggleCategory = (categoryId) => {
-    setExpandedCategories((prev) => ({
-      ...prev,
-      [categoryId]: !prev[categoryId]
-    }))
+    setExpandedCategory((prev) => (prev === categoryId ? null : categoryId))
   }
 
   return (
@@ -96,7 +124,7 @@ const ProductsPage = () => {
           <div className="pp-hero__overlay" />
         </div>
 
-        <div className="pp-hero__content container">
+        <div className={`pp-hero__content container scroll-reveal ${heroVisible ? 'scroll-reveal--visible' : ''}`}>
           <Link to="/" className="pp-back-btn">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
               <polyline points="15 18 9 12 15 6" />
@@ -111,7 +139,7 @@ const ProductsPage = () => {
         </div>
       </section>
 
-      <section className="pp-selection container">
+      <section className={`pp-selection container scroll-reveal ${selectionVisible ? 'scroll-reveal--visible' : ''}`} ref={selectionRef}>
         <div className="pp-explore-header">
           <span className="section-label">Explore</span>
           <h2 className="section-title">Browse Products by Category</h2>
@@ -119,43 +147,54 @@ const ProductsPage = () => {
 
         <div className="pp-categories-accordion">
           {categoriesData.map((category) => (
-            <div key={category.id} className="pp-category-item">
-              <button
-                className="pp-category-button"
-                style={{ '--accent-color': category.themeColor }}
+            <div 
+              key={category.id} 
+              id={category.id}
+              className={`pp-category pp-category--${category.id} ${expandedCategory === category.id ? 'pp-category--open' : ''}`}
+              style={{ '--theme-color': category.themeColor }}
+            >
+              <div
+                className="pp-category__banner"
                 onClick={() => toggleCategory(category.id)}
               >
-                <div className="pp-category-button__content">
-                  <h3 className="pp-category-button__name">{category.name}</h3>
-                  <p className="pp-category-button__tagline">{category.tagline}</p>
+                <div className="pp-category__info">
+                  <h3 className="pp-category__name">{category.name}</h3>
+                  <p className="pp-category__tagline">{category.tagline}</p>
+                  <div className="pp-category__toggle-pill">
+                    <span>{expandedCategory === category.id ? 'Close' : 'View Products'}</span>
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      className={`pp-category__chevron ${expandedCategory === category.id ? 'open' : ''}`}
+                    >
+                      <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                  </div>
                 </div>
-                <div className="pp-category-button__action">
-                  <span>View Products</span>
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    className={`pp-category-chevron ${expandedCategories[category.id] ? 'open' : ''}`}
-                  >
-                    <polyline points="6 9 12 15 18 9" />
-                  </svg>
+                <div className="pp-category__visual">
+                  <div className="pp-category__img-wrapper">
+                    <img src={category.image} className="pp-category__img" alt={category.name} />
+                  </div>
                 </div>
-              </button>
+              </div>
 
               <AnimatePresence>
-                {expandedCategories[category.id] && (
+                {expandedCategory === category.id && (
                   <motion.div
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3 }}
                     className="pp-products-dropdown"
-                    style={{ '--accent-color': category.themeColor }}
                   >
+                    <div className="pp-category__count-header">
+                      {category.products.length} PRODUCTS
+                    </div>
                     <div className="pp-product-grid">
                       {category.products.map((product, idx) => (
                         <motion.article
@@ -169,9 +208,8 @@ const ProductsPage = () => {
                             <img src={product.img} alt={product.name} />
                           </div>
                           <div className="pp-product-card__content">
-                            <span className="pp-product-card__form">{product.formSize}</span>
-                            <h4>{product.name}</h4>
-                            <p>{product.desc}</p>
+                            <h4 className="pp-product-card__title">{product.name}</h4>
+                            <span className="pp-product-card__form-size">{product.formSize.replace(' · ', ' - ')}</span>
                           </div>
                         </motion.article>
                       ))}
@@ -182,16 +220,6 @@ const ProductsPage = () => {
             </div>
           ))}
         </div>
-
-        <section className="pp-cta-strip">
-          <div className="pp-cta-strip__inner">
-            <div>
-              <p className="pp-cta-strip__label">Custom orders welcome</p>
-              <h3>Speak with our team for bulk supply and branded formulations.</h3>
-            </div>
-            <Link to="/about" className="btn btn-primary">Contact Us</Link>
-          </div>
-        </section>
       </section>
     </div>
   )
