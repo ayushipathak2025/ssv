@@ -77,13 +77,92 @@ const categoriesData = [
   }
 ]
 
+const CategoryAccordionItem = ({ category, expandedCategory, toggleCategory }) => {
+  const [ref, visible] = useIntersectionObserver({ threshold: 0.15 })
+  const isExpanded = expandedCategory === category.id
+
+  return (
+    <div 
+      ref={ref}
+      id={category.id}
+      className={`pp-category pp-category--${category.id} ${isExpanded ? 'pp-category--open' : ''} scroll-reveal ${visible ? 'scroll-reveal--visible' : ''}`}
+      style={{ '--theme-color': category.themeColor }}
+    >
+      <div
+        className="pp-category__banner"
+        onClick={() => toggleCategory(category.id)}
+      >
+        <div className="pp-category__info">
+          <h3 className="pp-category__name">{category.name}</h3>
+          <p className="pp-category__tagline">{category.tagline}</p>
+          <div className="pp-category__toggle-pill">
+            <span>{isExpanded ? 'Close' : 'View Products'}</span>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              className={`pp-category__chevron ${isExpanded ? 'open' : ''}`}
+            >
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </div>
+        </div>
+        <div className="pp-category__visual">
+          <div className="pp-category__img-wrapper">
+            <img src={category.image} className="pp-category__img" alt={category.name} />
+          </div>
+        </div>
+      </div>
+
+      <AnimatePresence>
+        {isExpanded && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="pp-products-dropdown"
+          >
+            <div className="pp-category__count-header">
+              {category.products.length} PRODUCTS
+            </div>
+            <div className="pp-product-grid">
+              {category.products.map((product, idx) => (
+                <motion.article
+                  key={product.id}
+                  className="pp-product-card"
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.25, delay: idx * 0.05 }}
+                >
+                  <div className="pp-product-card__media">
+                    <img src={product.img} alt={product.name} />
+                  </div>
+                  <div className="pp-product-card__content">
+                    <h4 className="pp-product-card__title">{product.name}</h4>
+                    <span className="pp-product-card__form-size">{product.formSize.replace(' · ', ' - ')}</span>
+                  </div>
+                </motion.article>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
+
 const ProductsPage = () => {
   const location = useLocation()
   const [expandedCategory, setExpandedCategory] = useState(() => {
     return location.state?.category || null
   })
   const [heroVisible, setHeroVisible] = useState(false)
-  const [selectionRef, selectionVisible] = useIntersectionObserver()
+  const [headerRef, headerVisible] = useIntersectionObserver({ threshold: 0.15 })
 
   useEffect(() => {
     const timer = setTimeout(() => setHeroVisible(true), 200)
@@ -140,100 +219,79 @@ const ProductsPage = () => {
           <div className="pp-hero__overlay" />
         </div>
 
-        <div className={`pp-hero__content container scroll-reveal ${heroVisible ? 'scroll-reveal--visible' : ''}`}>
-          <Link to="/" className="pp-back-btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-              <polyline points="15 18 9 12 15 6" />
-            </svg>
-            Back to Home
-          </Link>
-          <span className="pp-hero__label">OUR PORTFOLIO</span>
-          <h1 className="pp-hero__title">Medicines Crafted with Science & Care</h1>
-          <p className="pp-hero__sub">
-            A trusted range across five therapeutic categories — formulated to the highest safety standards.
-          </p>
+        <div className="pp-hero__content">
+          <div className={`pp-hero__text scroll-reveal ${heroVisible ? 'scroll-reveal--visible' : ''}`}>
+            <Link to="/" className="pp-back-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+              Back to Home
+            </Link>
+            <span className="pp-hero__label">OUR PORTFOLIO</span>
+            <h1 className="pp-hero__title">Medicines Crafted with Science & Care</h1>
+            <p className="pp-hero__sub">
+              A trusted range across five therapeutic categories — formulated to the highest safety standards.
+            </p>
+            <div className="pp-hero__buttons">
+              <a href=".pp-selection" onClick={(e) => {
+                e.preventDefault()
+                document.querySelector('.pp-selection')?.scrollIntoView({ behavior: 'smooth' })
+              }} className="btn btn-primary">
+                Browse Categories
+              </a>
+              <Link to="/about" className="btn btn-outline">
+                Quality Standards
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        <div className={`pp-hero__stats ${heroVisible ? 'pp-hero__stats--visible' : ''}`}>
+          <div className="pp-hero__stats-inner container">
+            <div className="pp-hero__stat" style={{ animationDelay: '0.6s' }}>
+              <span className="pp-hero__stat-number">5</span>
+              <span className="pp-hero__stat-label">Therapeutic Range</span>
+            </div>
+            <div className="pp-hero__stat" style={{ animationDelay: '0.75s' }}>
+              <span className="pp-hero__stat-number">200+</span>
+              <span className="pp-hero__stat-label">Formulations</span>
+            </div>
+            <div className="pp-hero__stat" style={{ animationDelay: '0.9s' }}>
+              <span className="pp-hero__stat-number">WHO-GMP</span>
+              <span className="pp-hero__stat-label">Certified</span>
+            </div>
+            <div className="pp-hero__stat" style={{ animationDelay: '1.05s' }}>
+              <span className="pp-hero__stat-number">100%</span>
+              <span className="pp-hero__stat-label">Tested Efficacy</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Scroll indicator */}
+        <div className="pp-hero__scroll">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
         </div>
       </section>
 
-      <section className={`pp-selection container scroll-reveal ${selectionVisible ? 'scroll-reveal--visible' : ''}`} ref={selectionRef}>
-        <div className="pp-explore-header">
+      <section className="pp-selection container">
+        <div 
+          ref={headerRef}
+          className={`pp-explore-header scroll-reveal ${headerVisible ? 'scroll-reveal--visible' : ''}`}
+        >
           <span className="section-label">Explore</span>
           <h2 className="section-title">Browse Products by Category</h2>
         </div>
 
         <div className="pp-categories-accordion">
           {categoriesData.map((category) => (
-            <div 
-              key={category.id} 
-              id={category.id}
-              className={`pp-category pp-category--${category.id} ${expandedCategory === category.id ? 'pp-category--open' : ''}`}
-              style={{ '--theme-color': category.themeColor }}
-            >
-              <div
-                className="pp-category__banner"
-                onClick={() => toggleCategory(category.id)}
-              >
-                <div className="pp-category__info">
-                  <h3 className="pp-category__name">{category.name}</h3>
-                  <p className="pp-category__tagline">{category.tagline}</p>
-                  <div className="pp-category__toggle-pill">
-                    <span>{expandedCategory === category.id ? 'Close' : 'View Products'}</span>
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                      className={`pp-category__chevron ${expandedCategory === category.id ? 'open' : ''}`}
-                    >
-                      <polyline points="6 9 12 15 18 9" />
-                    </svg>
-                  </div>
-                </div>
-                <div className="pp-category__visual">
-                  <div className="pp-category__img-wrapper">
-                    <img src={category.image} className="pp-category__img" alt={category.name} />
-                  </div>
-                </div>
-              </div>
-
-              <AnimatePresence>
-                {expandedCategory === category.id && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="pp-products-dropdown"
-                  >
-                    <div className="pp-category__count-header">
-                      {category.products.length} PRODUCTS
-                    </div>
-                    <div className="pp-product-grid">
-                      {category.products.map((product, idx) => (
-                        <motion.article
-                          key={product.id}
-                          className="pp-product-card"
-                          initial={{ opacity: 0, y: 12 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.25, delay: idx * 0.05 }}
-                        >
-                          <div className="pp-product-card__media">
-                            <img src={product.img} alt={product.name} />
-                          </div>
-                          <div className="pp-product-card__content">
-                            <h4 className="pp-product-card__title">{product.name}</h4>
-                            <span className="pp-product-card__form-size">{product.formSize.replace(' · ', ' - ')}</span>
-                          </div>
-                        </motion.article>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+            <CategoryAccordionItem
+              key={category.id}
+              category={category}
+              expandedCategory={expandedCategory}
+              toggleCategory={toggleCategory}
+            />
           ))}
         </div>
       </section>

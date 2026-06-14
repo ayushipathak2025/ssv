@@ -40,19 +40,58 @@ const AboutPage = () => {
           <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?w=1600&auto=format&fit=crop&q=80" alt="SSV laboratory" />
           <div className="ap-hero__overlay" />
         </div>
-        <div className={`ap-hero__content container scroll-reveal ${heroVisible ? 'scroll-reveal--visible' : ''}`}>
-          <Link to="/" className="ap-back-btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-              <polyline points="15 18 9 12 15 6" />
-            </svg>
-            Back to Home
-          </Link>
-          <span className="ap-hero__label">Who We Are</span>
-          <h1 className="ap-hero__title">About Us</h1>
-          <p className="ap-hero__sub">
-            Advancing global healthcare through scientific research, state-of-the-art manufacturing, and an uncompromising commitment to quality.
-          </p>
+        
+        <div className="ap-hero__content">
+          <div className={`ap-hero__text scroll-reveal ${heroVisible ? 'scroll-reveal--visible' : ''}`}>
+            <Link to="/" className="ap-back-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+              Back to Home
+            </Link>
+            <span className="ap-hero__label">Who We Are</span>
+            <h1 className="ap-hero__title">About Us</h1>
+            <p className="ap-hero__sub">
+              Advancing global healthcare through scientific research, state-of-the-art manufacturing, and an uncompromising commitment to quality.
+            </p>
+            <div className="ap-hero__buttons">
+              <a href="#about-story" onClick={(e) => {
+                e.preventDefault()
+                document.getElementById('about-story')?.scrollIntoView({ behavior: 'smooth' })
+              }} className="btn btn-primary">
+                Our Story
+              </a>
+              <a href="#about-standards" onClick={(e) => {
+                e.preventDefault()
+                document.getElementById('about-standards')?.scrollIntoView({ behavior: 'smooth' })
+              }} className="btn btn-outline">
+                Quality Standards
+              </a>
+            </div>
+          </div>
         </div>
+
+        <div className={`ap-hero__stats ${heroVisible ? 'ap-hero__stats--visible' : ''}`}>
+          <div className="ap-hero__stats-inner container">
+            <div className="ap-hero__stat" style={{ animationDelay: '0.6s' }}>
+              <span className="ap-hero__stat-number">38+</span>
+              <span className="ap-hero__stat-label">Years of Excellence</span>
+            </div>
+            <div className="ap-hero__stat" style={{ animationDelay: '0.75s' }}>
+              <span className="ap-hero__stat-number">200+</span>
+              <span className="ap-hero__stat-label">Product Portfolio</span>
+            </div>
+            <div className="ap-hero__stat" style={{ animationDelay: '0.9s' }}>
+              <span className="ap-hero__stat-number">500+</span>
+              <span className="ap-hero__stat-label">Professionals</span>
+            </div>
+            <div className="ap-hero__stat" style={{ animationDelay: '1.05s' }}>
+              <span className="ap-hero__stat-number">ISO 9001</span>
+              <span className="ap-hero__stat-label">Certified</span>
+            </div>
+          </div>
+        </div>
+
         {/* Scroll indicator */}
         <div className="ap-hero__scroll">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">

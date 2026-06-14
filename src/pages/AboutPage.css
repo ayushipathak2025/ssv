@@ -4,15 +4,16 @@
 
 /* Page Wrapper */
 .about-page {
-  padding-top: 100px; /* Offset for fixed navbar */
+  padding-top: 0;
   background-color: var(--background, #ffffff);
 }
 
 .ap-hero {
   position: relative;
-  min-height: 480px;
+  min-height: 100vh;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
   background-color: var(--primary, #1b4f72);
   overflow: hidden;
   color: #ffffff;
@@ -45,8 +46,96 @@
 .ap-hero__content {
   position: relative;
   z-index: 2;
-  padding: 80px 24px;
   width: 100%;
+  padding-top: 160px;
+  padding-bottom: 80px;
+  padding-left: 6%;
+  padding-right: 24px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.ap-hero__text {
+  max-width: 720px;
+  text-align: left;
+}
+
+.ap-hero__buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
+
+/* Stats Strip in About Hero */
+.ap-hero__stats {
+  position: relative;
+  z-index: 2;
+  margin-top: auto;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.5s;
+  width: 100%;
+}
+
+.ap-hero__stats--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ap-hero__stats::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+}
+
+.ap-hero__stats-inner {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 40px 24px;
+}
+
+.ap-hero__stat {
+  text-align: center;
+  animation: countUp 0.6s ease forwards;
+  opacity: 0;
+  position: relative;
+}
+
+.ap-hero__stat:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.ap-hero__stat-number {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--color-white);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.ap-hero__stat-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
 }
 
 .ap-hero__sub {
@@ -555,6 +644,25 @@
 }
 
 @media (max-width: 768px) {
+  .ap-hero__content {
+    padding-top: 140px;
+    padding-bottom: 40px;
+  }
+
+  .ap-hero__stats-inner {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+
+  .ap-hero__stat:not(:last-child)::after {
+    display: none;
+  }
+
+  .ap-hero__buttons {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   .ap-section {
     padding: 70px 0;
   }
@@ -587,17 +695,7 @@
    Scroll Reveal & Animation Transitions
    ========================================================================== */
 
-/* Hero Mount Animation */
-.ap-hero__content {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), transform 1s cubic-bezier(0.4, 0, 0.2, 1);
-}
 
-.ap-hero__content.scroll-reveal--visible {
-  opacity: 1;
-  transform: translateY(0);
-}
 
 /* Our Story section splits */
 .ap-who__content {

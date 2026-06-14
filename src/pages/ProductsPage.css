@@ -1,7 +1,7 @@
 /* ── Products Page Styles ── */
 
 .products-page {
-  padding-top: 80px;
+  padding-top: 0;
   background: var(--color-white);
   min-height: 100vh;
 }
@@ -9,9 +9,10 @@
 /* ── Hero Section ── */
 .pp-hero {
   position: relative;
-  min-height: 480px;
+  min-height: 100vh;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
   overflow: hidden;
   color: var(--color-white);
 }
@@ -38,9 +39,107 @@
 .pp-hero__content {
   position: relative;
   z-index: 2;
-  padding: 80px 24px;
-  max-width: 800px;
   width: 100%;
+  padding-top: 160px;
+  padding-bottom: 80px;
+  padding-left: 6%;
+  padding-right: 24px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.pp-hero__text {
+  max-width: 720px;
+  text-align: left;
+}
+
+.pp-hero__buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
+
+/* Stats Strip in Products Hero */
+.pp-hero__stats {
+  position: relative;
+  z-index: 2;
+  margin-top: auto;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.5s;
+  width: 100%;
+}
+
+.pp-hero__stats--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.pp-hero__stats::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+}
+
+.pp-hero__stats-inner {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 40px 24px;
+}
+
+.pp-hero__stat {
+  text-align: center;
+  animation: countUp 0.6s ease forwards;
+  opacity: 0;
+  position: relative;
+}
+
+.pp-hero__stat:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.pp-hero__stat-number {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--color-white);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.pp-hero__stat-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+/* Scroll indicator */
+.pp-hero__scroll {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.5);
+  animation: floatScroll 2.2s ease-in-out infinite;
+  z-index: 2;
 }
 
 .pp-back-btn {
@@ -372,11 +471,7 @@
 
 @media (max-width: 1024px) {
   .products-page {
-    padding-top: 64px;
-  }
-
-  .pp-hero {
-    min-height: 420px;
+    padding-top: 0;
   }
 }
 
@@ -387,6 +482,25 @@
 }
 
 @media (max-width: 768px) {
+  .pp-hero__content {
+    padding-top: 140px;
+    padding-bottom: 40px;
+  }
+
+  .pp-hero__stats-inner {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+
+  .pp-hero__stat:not(:last-child)::after {
+    display: none;
+  }
+
+  .pp-hero__buttons {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   .pp-category__info {
     padding: 24px 32px;
   }
@@ -435,48 +549,25 @@
    Scroll Reveal & Animation Transitions
    ========================================================================== */
 
-/* Hero Mount Animation */
-.pp-hero__content {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), transform 1s cubic-bezier(0.4, 0, 0.2, 1);
-}
 
-.pp-hero__content.scroll-reveal--visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Category Accordion container scroll reveal */
-.pp-categories-accordion {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1), transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
-  transition-delay: 0.15s;
-}
-
-.scroll-reveal--visible .pp-categories-accordion {
-  opacity: 1;
-  transform: translateY(0);
-}
 
 /* Stagger delay for individual category items on load of section */
 .pp-category {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, transform 0.3s ease;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-.scroll-reveal--visible .pp-category {
+.pp-category.scroll-reveal--visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-.scroll-reveal--visible .pp-category:nth-child(1) { transition-delay: 0.1s; }
-.scroll-reveal--visible .pp-category:nth-child(2) { transition-delay: 0.25s; }
-.scroll-reveal--visible .pp-category:nth-child(3) { transition-delay: 0.4s; }
-.scroll-reveal--visible .pp-category:nth-child(4) { transition-delay: 0.55s; }
-.scroll-reveal--visible .pp-category:nth-child(5) { transition-delay: 0.7s; }
+.pp-category.scroll-reveal--visible:nth-child(1) { transition-delay: 0.05s; }
+.pp-category.scroll-reveal--visible:nth-child(2) { transition-delay: 0.1s; }
+.pp-category.scroll-reveal--visible:nth-child(3) { transition-delay: 0.15s; }
+.pp-category.scroll-reveal--visible:nth-child(4) { transition-delay: 0.2s; }
+.pp-category.scroll-reveal--visible:nth-child(5) { transition-delay: 0.25s; }
 
 /* SVG badge icons hover effect in Products Page */
 .pp-category__chevron {
